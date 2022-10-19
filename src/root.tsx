@@ -18,17 +18,13 @@ export default function Root() {
   return (
     <Html lang="en">
       <Head>
-        <Title>SolidStart - With TailwindCSS</Title>
+        <Title>Solid Timer</Title>
         <Meta charset="utf-8" />
         <Meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <Body>
         <Suspense>
           <ErrorBoundary>
-            <A class="mr-2" href="/">
-              Index
-            </A>
-            <A href="/about">About</A>
             <Routes>
               <FileRoutes />
             </Routes>
