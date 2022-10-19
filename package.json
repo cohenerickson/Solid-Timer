@@ -21,6 +21,7 @@
     "@capacitor/android": "^4.3.0",
     "@capacitor/core": "^4.3.0",
     "@capacitor/ios": "^4.3.0",
+    "@capacitor/splash-screen": "^4.1.0",
     "@solidjs/meta": "^0.28.0",
     "@solidjs/router": "^0.5.0",
     "solid-js": "^1.5.8",
