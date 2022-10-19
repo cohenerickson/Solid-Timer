@@ -1,3 +1,12 @@
 {
-  "recommendations": ["ionic.ionic", "esbenp.prettier-vscode"]
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "formulahendry.auto-rename-tag",
+    "wix.vscode-import-cost",
+    "esbenp.prettier-vscode",
+    "bradlc.vscode-tailwindcss",
+    "Gruntfuggly.todo-tree",
+    "Ionic.ionic",
+    "ms-azuretools.vscode-docker"
+  ]
 }
