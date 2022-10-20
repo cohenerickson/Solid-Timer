@@ -1,30 +1,38 @@
-# SolidStart
+# 🚧 This project is under development 🚧
 
-Everything you need to build a Solid project, powered by [`solid-start`](https://start.solidjs.com);
+# Solid Timer
 
-## Creating a project
+A professional Rubik's cube timer application inspired by ChaoTimer and csTimer built using SolidJS, Typescript, TailwindCSS, and Capacitor.
 
-```bash
-# create a new project in the current directory
-npm init solid
+# Data Storage
 
-# create a new project in my-app
-npm init solid my-app
-```
+All data is stored in the browser using different API's, settings are stored in `localStorage` and all session related information such as solves are stored in `indexedDB`.
 
-## Developing
+There are plans in the future to create a cloud storage option with cross-device sync that will be available to paying users.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+# Development
 
 ```bash
+# Cloning repo
+git clone https://github.com/cohenerickson/Solid-Timer.git
+cd Solid-Timer
+
+# Installing dependencies
+npm install
+
+# Starting development server
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
+## Building from source
 
-Solid apps are built with _adapters_, which optimise your project for deployment to different environments.
+```bash
+# Building for web
+npm run build
 
-By default, `npm run build` will generate a Node app that you can run with `npm start`. To use a different adapter, add it to the `devDependencies` in `package.json` and specify in your `vite.config.js`.
+# Open in Android Studio for Android builds
+npm run start:android
+
+# Open in XCode for IOS builds
+npm run start:ios
+```

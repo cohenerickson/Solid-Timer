@@ -2,10 +2,10 @@
   "name": "react-timer",
   "scripts": {
     "dev": "solid-start dev",
-    "build": "solid-start build && cap sync",
+    "build": "solid-start build",
     "start": "solid-start start",
-    "start:ios": "cap open ios",
-    "start:android": "cap open android"
+    "start:ios": "npm run build && cap sync && cap open ios",
+    "start:android": "npm run build && cap sync && cap open android"
   },
   "type": "module",
   "devDependencies": {
