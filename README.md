@@ -2,7 +2,7 @@
 
 # Solid Timer
 
-A professional Rubik's cube timer application inspired by ChaoTimer and csTimer built using SolidJS, Typescript, TailwindCSS, and Capacitor.
+A Rubik's cube timer application inspired by ChaoTimer and csTimer built using SolidJS, Typescript, TailwindCSS, and Capacitor.
 
 # Data Storage
 

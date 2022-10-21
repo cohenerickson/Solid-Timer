@@ -3,7 +3,7 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "target": "ESNext",
-    "module": "ESNext",
+    "module": "ES6",
     "moduleResolution": "node",
     "jsxImportSource": "solid-js",
     "jsx": "preserve",
