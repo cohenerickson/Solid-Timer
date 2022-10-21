@@ -9,9 +9,18 @@ import Dexie from "dexie";
 
 const [scramble, setScramble] = createSignal(new Alg(""));
 const [sessions, setSessions] = createSignal([] as Session[]);
-const [averageOf5, setaverageOf5] = createSignal(0);
-const [averageOf12, setaverageOf12] = createSignal(0);
+const [currentSession, setCurrentSession] = createSignal({
+  id: uuidv4(),
+  event: "333",
+  solves: [
+    {
+      time: 0
+    }
+  ]
+} as Session);
 const [average, setAverage] = createSignal(0);
+const [averageOf5, setAverageOf5] = createSignal(0);
+const [averageOf12, setAverageOf12] = createSignal(0);
 
 let sessionsObj = [] as Session[];
 let currentSessionObj = {} as Session;
@@ -24,6 +33,7 @@ async function openDb(): Promise<any> {
   return db;
 }
 
+// TODO: Make this work
 async function fillData() {
   if (typeof window !== "undefined") {
     const db: any = await openDb();
@@ -44,17 +54,21 @@ async function fillData() {
         await db.sessions.add(sessionData);
         return sessionData;
       })());
+    setCurrentSession(currentSessionObj);
     await db.close();
-    updateStorage();
+    calculateAverages();
     newScramble();
+    updateStorage();
   }
 }
 fillData();
 
+// TODO: Make this work
 async function updateStorage() {
   const db: any = await openDb();
   await db.sessions.clear();
   await db.sessions.bulkAdd(sessionsObj);
+  await db.close();
   localStorage.setItem("currentSessionId", currentSessionObj.id);
 }
 
@@ -83,18 +97,48 @@ export function deleteSession(id: string): void {
 export function addSolve(solve: Solve): void {
   currentSessionObj.solves.push(solve);
   sessionsObj[currentSessionObj.id] = currentSessionObj;
+  calculateAverages();
   updateStorage();
 }
 
 export function deleteSolve(solveId: string) {
   currentSessionObj.solves.filter((solve: Solve) => solve.id !== solveId);
   sessionsObj[currentSessionObj.id] = currentSessionObj;
+  calculateAverages();
   updateStorage();
 }
 
 export function setActiveSession(id: string) {
   currentSessionObj = sessionsObj[id];
+  calculateAverages();
   updateStorage();
 }
 
-export { scramble, sessions };
+function calculateAverages() {
+  const allTimes = currentSessionObj.solves.map((x: Solve): number => x.time);
+  setAverage(calculateAverage(allTimes));
+  setAverageOf5(
+    allTimes.length >= 5 ? calculateAverage(allTimes.slice(-5)) : NaN
+  );
+  setAverageOf12(
+    allTimes.length >= 12 ? calculateAverage(allTimes.slice(-12)) : NaN
+  );
+}
+
+function calculateAverage(times: number[]): number {
+  if (times.length < 3) return NaN;
+  const averageMin = Math.min(...times);
+  const averageMax = Math.max(...times);
+  const average = times.reduce((a, b) => a + b, 0);
+  return (average - averageMin - averageMax) / (times.length - 2);
+}
+
+export {
+  scramble,
+  sessions,
+  average,
+  averageOf5,
+  averageOf12,
+  currentSession,
+  setCurrentSession
+};
