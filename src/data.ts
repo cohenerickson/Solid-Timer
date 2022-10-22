@@ -22,7 +22,13 @@ const [average, setAverage] = createSignal(0);
 const [averageOf5, setAverageOf5] = createSignal(0);
 const [averageOf12, setAverageOf12] = createSignal(0);
 
-let sessionsObj = [] as Session[];
+let sessionsObj = [
+  {
+    id: uuidv4(),
+    solves: [],
+    event: "333"
+  }
+] as Session[];
 let currentSessionObj = {} as Session;
 
 async function openDb(): Promise<any> {
@@ -54,6 +60,13 @@ async function fillData() {
         await db.sessions.add(sessionData);
         return sessionData;
       })());
+    if (
+      !sessionsObj.find(
+        (session: Session) => session.id === currentSessionObj.id
+      )
+    ) {
+      sessionsObj.push(currentSessionObj);
+    }
     setCurrentSession(currentSessionObj);
     await db.close();
     calculateAverages();
