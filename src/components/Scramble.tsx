@@ -12,7 +12,7 @@ export default function Scramble(): JSX.Element {
   return (
     <p
       id="scramble"
-      class="my-5 p-10 text-lg text-center cursor-pointer"
+      class="my-5 p-10 text-lg text-center cursor-pointer fixed top-0 w-full"
       onClick={handleNewScramble}
     >
       {scramble().toString()}

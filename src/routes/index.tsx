@@ -18,13 +18,15 @@ export default function Home() {
   function handleDown(event) {
     if (event.target.id === "scramble") return;
     if (solveState() === 3) {
-      setSolveState(0);
+      const time = Date.now() - startTime;
       addSolve({
         scramble: scramble().toString(),
-        time: Date.now() - startTime,
+        time: time,
         id: uuidv4()
       });
+      setSolveState(0);
       newScramble();
+      setTime(time);
     } else {
       i++;
       const startingI = i;
@@ -67,16 +69,16 @@ export default function Home() {
   });
 
   return (
-    <main class="">
+    <main class="h-full">
       <div class={`${stage() < 0 ? "block" : "hidden"}`}></div>
       <div
-        class={`${stage() == 0 ? "block" : "hidden"}`}
+        class={`${stage() == 0 ? "block" : "hidden"} h-full`}
         onPointerDown={handleDown}
         onMouseUp={handleUp}
         onTouchEnd={handleUp}
       >
         <Scramble></Scramble>
-        <div class="text-center h-full">
+        <div class="flex flex-col items-center justify-center text-center h-full">
           <p
             class={`text-2xl ${
               solveState() === 0

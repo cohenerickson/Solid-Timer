@@ -2,7 +2,7 @@ import { CapacitorConfig } from "@capacitor/cli";
 
 const config: CapacitorConfig = {
   appId: "com.cohenerickson.timer",
-  appName: "react-timer",
+  appName: "solid-timer",
   webDir: "dist/public",
   bundledWebRuntime: false,
   plugins: {

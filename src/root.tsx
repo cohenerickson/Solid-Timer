@@ -46,7 +46,7 @@ export default function Root() {
         <Meta property="og:description" content={seo.description} />
         <Meta name="keywords" content={seo.keywords} />
       </Head>
-      <Body class="bg-white text-black dark:bg-black dark:text-white select-none">
+      <Body class="bg-white text-black dark:bg-black dark:text-white select-none h-screen">
         <Suspense>
           <ErrorBoundary>
             <Routes>

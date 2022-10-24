@@ -18,18 +18,18 @@ const [currentSession, setCurrentSession] = createSignal({
     }
   ]
 } as Session);
-const [average, setAverage] = createSignal(0);
+const [best, setBest] = createSignal(0);
 const [averageOf5, setAverageOf5] = createSignal(0);
 const [averageOf12, setAverageOf12] = createSignal(0);
 
-let sessionsObj = [
+let sessionsObj: Session[] = [
   {
     id: uuidv4(),
     solves: [],
     event: "333"
   }
-] as Session[];
-let currentSessionObj = {} as Session;
+];
+let currentSessionObj: Session = sessionsObj[0];
 
 async function openDb(): Promise<any> {
   const db: any = new Dexie("Database");
@@ -129,7 +129,7 @@ export function setActiveSession(id: string) {
 
 function calculateAverages() {
   const allTimes = currentSessionObj.solves.map((x: Solve): number => x.time);
-  setAverage(calculateAverage(allTimes));
+  setBest(Math.min(...allTimes));
   setAverageOf5(
     allTimes.length >= 5 ? calculateAverage(allTimes.slice(-5)) : NaN
   );
@@ -149,7 +149,7 @@ function calculateAverage(times: number[]): number {
 export {
   scramble,
   sessions,
-  average,
+  best,
   averageOf5,
   averageOf12,
   currentSession,
