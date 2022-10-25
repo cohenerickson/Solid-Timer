@@ -2,6 +2,7 @@ import { createSignal } from "solid-js";
 import Scramble from "~/components/Scramble";
 import { currentSession, addSolve, scramble, newScramble } from "~/data";
 import Stats from "~/components/Stats";
+import Nav from "~/components/Nav";
 import { v4 as uuidv4 } from "uuid";
 import formatTime from "~/util/formatTime";
 
@@ -68,6 +69,10 @@ export default function Home() {
     }
   });
 
+  window.addEventListener("contextmenu", (event: MouseEvent) => {
+    event.preventDefault();
+  });
+
   return (
     <main class="h-full">
       <div class={`${stage() < 0 ? "block" : "hidden"}`}></div>
@@ -96,6 +101,7 @@ export default function Home() {
         </div>
       </div>
       <div class={`${stage() > 0 ? "block" : "hidden"}`}></div>
+      <Nav setStage={setStage}></Nav>
     </main>
   );
 }

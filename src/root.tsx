@@ -45,6 +45,10 @@ export default function Root() {
         <Meta name="description" content={seo.description} />
         <Meta property="og:description" content={seo.description} />
         <Meta name="keywords" content={seo.keywords} />
+
+        <link rel="manifest" href="/manifest.json" />
+
+        <script src="/pro.fontawesome.js" defer></script>
       </Head>
       <Body class="bg-white text-black dark:bg-black dark:text-white select-none h-screen">
         <Suspense>
